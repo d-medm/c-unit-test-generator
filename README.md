@@ -53,7 +53,7 @@ make
 
 ## Issues Faced
 1. **LLM producing code in markdown format**   
-\n Some of the consistant issues faced were:
+Some of the consistant issues faced were:
 - CodeLlama:7b Model almost always produced code in markdown format which causes the build to fail.
 To combat this, I tried stripping the markdown marks from the output.
 
