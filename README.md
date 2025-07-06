@@ -52,11 +52,11 @@ make
 ```
 
 ## Issues Faced
-1. **LLM producing code in markdown format**
-Some of the consistant issues faced were:
+1. **LLM producing code in markdown format**   
+\n Some of the consistant issues faced were:
 - CodeLlama:7b Model almost always produced code in markdown format which causes the build to fail.
 To combat this, I tried stripping the markdown marks from the output.
 
-2. **Deprecation Issues`with GCC 13**
+2. **Deprecation Issues`with GCC 13**  
 There is a deprecation bug with GNU that my project seems to trigger.
 Workaround: Downgrade to GCC 12.# c-unit-test-generator
