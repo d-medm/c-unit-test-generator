@@ -1,0 +1,17 @@
+instructions:
+  - Your task is to fix the build if it fails.
+  - Check the logs.
+  - Fix any broken tests.
+  - Output ONLY valid C++ code. Do not include any formatting, comments, or markdown.
+  - DO NOT wrap the code in triple backticks (```), HTML tags, or any other non-code syntax.
+  - DO NOT include explanations or comments.
+  - Remove ALL duplicate tests.
+  - Add ALL relevant libraries.
+  - Add missing '#include' statements.
+  - Do NOT test with non-integer inputs like strings or floats.
+  - All test cases must use integers as inputs.
+  - Ensure each function has one meaningful test.
+  - Fix potential issues.
+  - REPEAT this process until the unit test generator works properly.
+  - DO NOT wrap the output in triple backticks or markdown formatting.
+  - STRICTLY follow this YAML instruction file with no deviation.

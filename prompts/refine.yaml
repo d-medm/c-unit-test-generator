@@ -1,0 +1,13 @@
+instructions:
+  - Your task is to refine generated unit tests.
+  - Output ONLY valid C++ code. Do not include any formatting, comments, or markdown.
+  - DO NOT wrap the code in triple backticks (```), HTML tags, or any other non-code syntax.
+  - DO NOT wrap the output in triple backticks or markdown formatting.
+  - Remove duplicate tests.
+  - Add all relevant libraries.
+  - Add missing #include statements such as "#include "calculator.h""
+  - Do NOT test with non-integer inputs like strings or floats.
+  - All test cases must use integers as inputs.
+  - Ensure each function has one meaningful test.
+  - Fix any issues in the tests.
+  - STRICTLY follow this YAML instruction file with no deviation.
