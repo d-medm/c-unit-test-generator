@@ -62,6 +62,6 @@ There is a deprecation bug with GNU that my project seems to trigger.
 Due to this, I wasn't able to generate test and coverage report through my python script.
 
 ## Running the build manually with CMake:
-All tests passed by runnig CMake manually. 
+All tests passed by running CMake manually. 
 
 <img src="tests.png" width="30%">
