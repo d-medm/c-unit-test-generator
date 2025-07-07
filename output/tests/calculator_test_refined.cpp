@@ -1,26 +1,29 @@
-Here is the refined Google Test code for the given calculator functions:
-cpp
+
 #include <gtest/gtest.h>
 #include "calculator.h"
 
-TEST(CalculatorTest, Add) {
-    EXPECT_EQ(add(2, 3), 5);
+TEST(CalculatorRefined, Add) {
+    int result = add(1, 2);
+    EXPECT_EQ(result, 3);
 }
 
-TEST(CalculatorTest, Subtract) {
-    EXPECT_EQ(subtract(4, 2), 2);
+TEST(CalculatorRefined, Subtract) {
+    int result = subtract(1, 2);
+    EXPECT_EQ(result, -1);
 }
 
-TEST(CalculatorTest, Multiply) {
-    EXPECT_EQ(multiply(2, 3), 6);
+TEST(CalculatorRefined, Multiply) {
+    int result = multiply(2, 3);
+    EXPECT_EQ(result, 6);
 }
 
-TEST(CalculatorTest, Divide) {
-    EXPECT_EQ(divide(8, 4), 2);
+TEST(CalculatorRefined, Divide) {
+    int result = divide(4, 2);
+    EXPECT_EQ(result, 2);
 }
 
-TEST(CalculatorTest, DivisionByZero) {
-    ASSERT_ANY_THROW(divide(10, 0));
+TEST(CalculatorRefined, DivideByZero) {
+    EXPECT_THROW(divide(1, 0), std::invalid_argument);
 }
 
-The `DivisionByZero` test case checks that the `divide` function throws an exception when it is given a divisor of zero. This is an important test case because it verifies that the function behaves correctly when given invalid input.
+

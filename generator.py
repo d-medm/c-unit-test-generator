@@ -44,13 +44,14 @@ def generate_tests_for_file(instruction: str, filename: str, code: str, model: s
         CODE: {code}
         
         PROVIDE GOOGLE TEST CODE. 
-        DO NOT INCLUDE FORMATTING."""
+        DO NOT INCLUDE FORMATTING.
+        DO NOT INCLUDE EXPLANATORY PHRASES. """
     return query_llm(prompt, model)
 
 def save_test_file(output_dir, source_filename, test_code):
     # sometimes output includes markdown format, 
     # this makes sure to remove it from output
-    test_code = test_code.replace("```ccp", "").strip()
+    test_code = test_code.replace("```cpp", "").replace("```c++", "").replace("```", "")
 
     # create test file
     test_filename = source_filename.replace('.cpp', '_test.cpp').replace('.h', '_test.cpp')
@@ -84,14 +85,15 @@ def refine_test_files(refine_instructions: str, original_source: str, test_code:
     GENERATED TEST CODE TO REFINE: {test_code}
 
     PROVIDE REFINED GOOGLE TEST CODE.
-    DO NOT INCLUDE FORMATTING. """
+    DO NOT INCLUDE FORMATTING. 
+    DO NOT INCLUDE EXPLANATORY PHRASES. """
 
     return query_llm(prompt, model)
 
 # save refined tests to new file
 def save_refined_tests(output_dir: str, filename: str, refined_code: str):
     # also remove markdown format from refined tests
-    refined_code = refined_code.replace("```", "").strip()
+    refined_code = refined_code.replace("```cpp", "").replace("```c++", "").replace("```", "")
 
     #create new test files
     refined_filename = filename.replace('_test.cpp', '_test_refined.cpp')
@@ -125,10 +127,20 @@ def build() -> Tuple[bool, str]:
     
     # get all test files
     if os.path.exists("output/tests"):
-        for file in os.listdir("output/tests"):
-            if file.endswith('_test_refined.cpp'):
-                test_files.append(os.path.join("output/tests", file))
-            elif file.endswith('_test.cpp') and not any('_refined' in tf for tf in test_files):
+        all_files = os.listdir("output/tests")
+        
+        # collect all refined test files
+        refined_files = [f for f in all_files if f.endswith('_test_refined.cpp')]
+        for file in refined_files:
+            test_files.append(os.path.join("output/tests", file))
+        
+        # collect original test files only if no refined version exists
+        original_files = [f for f in all_files if f.endswith('_test.cpp') and not f.endswith('_test_refined.cpp')]
+        for file in original_files:
+            # check if there's a corresponding refined version
+            base_name = file[:-4]  # remove .cpp
+            refined_name = base_name + '_refined.cpp'
+            if refined_name not in all_files:
                 test_files.append(os.path.join("output/tests", file))
     
     # get all source files
@@ -194,7 +206,7 @@ def generate_coverage_report() -> Tuple[bool, str]:
             return True, "Coverage report generated in build/coverage_html"
             
         except (subprocess.CalledProcessError, FileNotFoundError):
-            # Fall back to basic gcov
+            # fall back to basic gcov
             coverage_files = []
             if os.path.exists("build"):
                 for file in os.listdir("build"):
@@ -243,13 +255,12 @@ def main():
     for filename, test_code in generated_tests:
         print(f"Refining tests for {filename}...")
 
-        # Find corresponding source file
+        # find corresponding source file
         source_filename = filename.replace('_test.cpp', '.cpp')
         if source_filename not in source_code_map:
             source_filename = filename.replace('_test.cpp', '.h')
         
         original_source = source_code_map.get(source_filename, "")
-        refined_code = refine_test_files(refinement_instructions, original_source, test_code, model)
 
         refined_code = refine_test_files(refinement_instructions, original_source, test_code, model)
         if refined_code:

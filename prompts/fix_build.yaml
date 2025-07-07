@@ -2,9 +2,12 @@ instructions:
   - Your task is to fix the build if it fails.
   - Check the logs.
   - Fix any broken tests.
-  - Output ONLY valid C++ code. Do not include any formatting, comments, or markdown.
+  - Output ONLY valid C++ TEST code. Do not include any formatting, comments, or markdown.
   - DO NOT wrap the code in triple backticks (```), HTML tags, or any other non-code syntax.
   - DO NOT include explanations or comments.
+  - DO NOT include function implementations or class definitions - ONLY TEST CODE.
+  - DO NOT copy header files or source code into the test file.
+  - Test files should ONLY contain #include statements and TEST() macros.
   - Remove ALL duplicate tests.
   - Add ALL relevant libraries.
   - Add missing '#include' statements.

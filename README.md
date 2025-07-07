@@ -59,5 +59,9 @@ To combat this, I tried stripping the markdown marks from the output.
 
 2. **Deprecation Issues with GCC 13**  
 There is a deprecation bug with GNU that my project seems to trigger.  
-Due to this, I wasn't able to generate test and coverage report.  
-Workaround: Downgrade to GCC 12.
+Due to this, I wasn't able to generate test and coverage report through my python script.
+
+## Running the build manually with CMake:
+All tests passed by runnig CMake manually. 
+
+<img src="tests.png" width="30%">
